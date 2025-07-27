@@ -18,7 +18,7 @@ const Sidebar: React.FC<SidebarProps> = ({
   const [selectedOption, setSelectedOption] = useState("specific");
   const [showSecondSection, setShowSecondSection] = useState(false);
   const [commentTrigger, setCommentTrigger] = useState("specific");
-  const [triggerWords, setTriggerWords] = useState("Price");
+  const [triggerWords, setTriggerWords] = useState("Price, Link, Shop");
   const [tags, setTags] = useState(["Price", "Link", "Shop"]);
 
   const posts: Post[] = [
@@ -196,7 +196,6 @@ const Sidebar: React.FC<SidebarProps> = ({
             </label>
 
             <div className="input-section">
-              <label className="input-label">Price</label>
               <input
                 type="text"
                 className="trigger-input"
