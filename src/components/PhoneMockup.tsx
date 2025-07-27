@@ -22,21 +22,26 @@ interface PhoneMockupProps {
 
 const PhoneMockup: React.FC<PhoneMockupProps> = ({ selectedPost }) => {
   const [activeTab, setActiveTab] = useState("Post");
+  const [showComments, setShowComments] = useState(false);
 
   // Default post data if no post is selected
   const defaultPost: Post = {
     id: 1,
     image:
-      "https://images.unsplash.com/photo-1531297484001-80022131f5a1?w=400&h=400&fit=crop",
+      "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjQwMCIgdmlld0JveD0iMCAwIDQwMCA0MDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI0MDAiIGhlaWdodD0iNDAwIiBmaWxsPSIjMjVBRDcwIi8+CjxyZWN0IHk9IjgwIiB3aWR0aD0iNDAwIiBoZWlnaHQ9IjgwIiBmaWxsPSIjMjVBRDcwIi8+Cjx0ZXh0IHg9IjIwMCIgeT0iMTIwIiBmaWxsPSJ3aGl0ZSIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjE4IiBmb250LXdlaWdodD0iYm9sZCIgdGV4dC1hbmNob3I9Im1pZGRsZSI+V2hhdHNBcHAgaGl0cyAzIEJpbGxpb24gVXNlcnMhPC90ZXh0Pgo8Y2lyY2xlIGN4PSIzMDAiIGN5PSIxMDAiIHI9IjIwIiBmaWxsPSIjRkZGRkZGIi8+CjxjaXJjbGUgY3g9IjMyMCIgY3k9IjgwIiByPSIxNSIgZmlsbD0iI0ZGRkZGRiIvPgo8Y2lyY2xlIGN4PSIzNDAiIGN5PSIxMjAiIHI9IjEwIiBmaWxsPSIjRkZGRkZGIi8+CjxwYXRoIGQ9Ik0yMDAgMzAwIEwyNTAgMzUwIEwyMDAgMzUwIFoiIGZpbGw9IiMyNUFENzAiLz4KPHN2ZyB4PSIxNzUiIHk9IjI3NSIgd2lkdGg9IjUwIiBoZWlnaHQ9IjUwIiB2aWV3Qm94PSIwIDAgMjQgMjQiIGZpbGw9IndoaXRlIj4KPHBhdGggZD0iTTE3LjQ3MiAxNC4wMDJjLjM5OC0uNDczLjEwMi0xLjQ1LS40NDMtMS40NWgtNC4wNzVjLSUyLjU0NSAwLTQuNjA0IDIuMDYtNC42MDQgNC42MDR2NC4wNzVjMCAyLjU0NSAyLjA2IDQuNjA0IDQuNjA0IDQuNjA0aDQuMDc1YzIuNTQ1IDAgNC42MDQtMi4wNiA0LjYwNC00LjYwNHYtNC4wNzVjMC0uMjE5LS4wMTgtLjQzNS0uMDUyLS42NDdsMS4xNzQtMS4xNzR6bS0xLjQ1LTEuNDVjLS4zOTgtLjQ3My0xLjA0NS0uNTUyLTEuNTE4LS4xNTQtLjQ3My4zOTgtLjU1MiAxLjA0NS0uMTU0IDEuNTE4bC0xLjE3NCAxLjE3NGMtLjIxOS0uMDM0LS40MjgtLjA1Mi0uNjQ3LS4wNTJoLTQuMDc1Yy0yLjU0NSAwLTQuNjA0IDIuMDYtNC42MDQgNC42MDR2NC4wNzVjMCAyLjU0NSAyLjA2IDQuNjA0IDQuNjA0IDQuNjA0aDQuMDc1YzIuNTQ1IDAgNC42MDQtMi4wNiA0LjYwNC00LjYwNHYtNC4wNzVjMC0uMjE5LS4wMTgtLjQzNS0uMDUyLS42NDdsMS4xNzQtMS4xNzR6Ii8+Cjwvc3ZnPgo8L3N2Zz4K",
     user: "botspacehq",
     caption:
-      "When your mom turns into your marketing manager 😅 But she's right... BotSpace is kinda genius. 😉",
-    hashtags: "#BotSpace #MomKnowsBest #ContentCreatorLife",
+      "WhatsApp hits 3 Billion Users! 🎉 The messaging giant continues to dominate the global communication landscape. Green balloons and celebrations everywhere! 🎈",
+    hashtags: "#WhatsApp #3Billion #Messaging #TechNews #BotSpace",
     likes: 71,
     comments: 22,
   };
 
   const currentPost = selectedPost || defaultPost;
+
+  const handleCommentClick = () => {
+    setShowComments(!showComments);
+  };
 
   return (
     <div className="phone-mockup">
@@ -58,54 +63,73 @@ const PhoneMockup: React.FC<PhoneMockupProps> = ({ selectedPost }) => {
         <div className="post-container">
           {activeTab === "Post" && (
             <>
-              <div className="post-header">
-                <div className="user-info">
-                  <div className="profile-pic">
-                    <img
-                      src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=40&h=40&fit=crop&crop=face"
-                      alt={currentPost.user}
-                    />
+              {/* Background Post - Always visible */}
+              <div
+                className={`post-background ${showComments ? "dimmed" : ""}`}
+              >
+                <div className="post-header">
+                  <div className="user-info">
+                    <div className="profile-pic">
+                      <img
+                        src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=40&h=40&fit=crop&crop=face"
+                        alt={currentPost.user}
+                      />
+                    </div>
+                    <span className="username">{currentPost.user}</span>
                   </div>
-                  <span className="username">{currentPost.user}</span>
+                  <div className="more-options">
+                    <IoEllipsisHorizontal size={20} />
+                  </div>
                 </div>
-                <div className="more-options">
-                  <IoEllipsisHorizontal size={20} />
+
+                <div className="post-image">
+                  <img src={currentPost.image} alt="Post content" />
+                </div>
+
+                <div className="post-actions">
+                  <div className="action-buttons">
+                    <button className="action-btn">
+                      <IoHeart size={24} />
+                    </button>
+                    <span className="likes-count">{currentPost.likes}</span>
+                    <button className="action-btn" onClick={handleCommentClick}>
+                      <IoChatbubbleOutline size={24} />
+                    </button>
+                    <span className="comments-count">
+                      {currentPost.comments}
+                    </span>
+                    <button className="action-btn">
+                      <IoPaperPlaneOutline size={24} />
+                    </button>
+                  </div>
+                  <button className="bookmark-btn">
+                    <IoBookmarkOutline size={24} />
+                  </button>
+                </div>
+
+                <div className="post-content">
+                  <div className="post-text">
+                    <span className="username">{currentPost.user}</span>
+                    <span className="verified-badge">☑️</span>
+                    <span className="text">{currentPost.caption}</span>
+                  </div>
+                  <div className="hashtags">{currentPost.hashtags}</div>
+                  <div className="view-comments" onClick={handleCommentClick}>
+                    View all comments
+                  </div>
+                  <div className="post-time">13 hours ago</div>
                 </div>
               </div>
 
-              <div className="post-image">
-                <img src={currentPost.image} alt="Post content" />
-              </div>
-
-              <div className="post-actions">
-                <div className="action-buttons">
-                  <button className="action-btn">
-                    <IoHeart size={24} />
-                  </button>
-                  <span className="likes-count">{currentPost.likes}</span>
-                  <button className="action-btn">
-                    <IoChatbubbleOutline size={24} />
-                  </button>
-                  <span className="comments-count">{currentPost.comments}</span>
-                  <button className="action-btn">
-                    <IoPaperPlaneOutline size={24} />
-                  </button>
+              {/* Comments Overlay */}
+              {showComments && (
+                <div className="comments-overlay">
+                  <CommentsView
+                    post={currentPost}
+                    onClose={() => setShowComments(false)}
+                  />
                 </div>
-                <button className="bookmark-btn">
-                  <IoBookmarkOutline size={24} />
-                </button>
-              </div>
-
-              <div className="post-content">
-                <div className="post-text">
-                  <span className="username">{currentPost.user}</span>
-                  <span className="verified-badge">☑️</span>
-                  <span className="text">{currentPost.caption}</span>
-                </div>
-                <div className="hashtags">{currentPost.hashtags}</div>
-                <div className="view-comments">View all comments</div>
-                <div className="post-time">13 hours ago</div>
-              </div>
+              )}
             </>
           )}
 

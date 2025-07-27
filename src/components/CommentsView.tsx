@@ -1,13 +1,14 @@
 import React, { useState } from "react";
 import type { Post } from "../types/index.ts";
 import "./CommentsView.css";
-import { IoEllipsisHorizontal, IoChevronDown } from "react-icons/io5";
+import { IoClose, IoPaperPlaneOutline, IoHeartOutline } from "react-icons/io5";
 
 interface CommentsViewProps {
   post: Post;
+  onClose?: () => void;
 }
 
-const CommentsView: React.FC<CommentsViewProps> = () => {
+const CommentsView: React.FC<CommentsViewProps> = ({ onClose }) => {
   const [commentText, setCommentText] = useState("");
 
   const comments = [
@@ -41,14 +42,24 @@ const CommentsView: React.FC<CommentsViewProps> = () => {
     },
   ];
 
-  const emojiReactions = ["❤️", "🙌", "🔥", "👏", "😍", "😂", "😮", "😢"];
+  const emojiReactions = ["❤️", "🙌", "🔥", "🌮", "😢", "😍", "🙄", "😂"];
 
   return (
-    <div className="comments-view">
+    <div className="comments-overlay-container">
+      {/* Drag Handle */}
+      <div className="drag-handle"></div>
+
       <div className="comments-header">
         <h3>Comments</h3>
-        <div className="filter-dropdown">
-          <IoChevronDown size={16} />
+        <div className="header-actions">
+          <button className="send-btn">
+            <IoPaperPlaneOutline size={20} />
+          </button>
+          {onClose && (
+            <button className="close-btn" onClick={onClose}>
+              <IoClose size={20} />
+            </button>
+          )}
         </div>
       </div>
 
@@ -61,13 +72,15 @@ const CommentsView: React.FC<CommentsViewProps> = () => {
             <div className="comment-content">
               <div className="comment-header">
                 <span className="comment-username">{comment.username}</span>
-                {comment.isNew && <span className="new-badge">New</span>}
+                <span className="comment-time">{comment.timeAgo}</span>
               </div>
               <div className="comment-text">{comment.text}</div>
-              <div className="comment-time">{comment.timeAgo}</div>
+              <div className="comment-actions">
+                <button className="reply-btn">Reply</button>
+              </div>
             </div>
-            <div className="comment-menu">
-              <IoEllipsisHorizontal size={16} />
+            <div className="comment-like">
+              <IoHeartOutline size={16} />
             </div>
           </div>
         ))}
