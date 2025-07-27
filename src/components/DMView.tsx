@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import "./DMView.css";
-import { 
-  IoArrowBack, 
-  IoEllipsisHorizontal, 
-  IoMailOutline, 
-  IoPaperPlaneOutline 
+import {
+  IoArrowBack,
+  IoEllipsisHorizontal,
+  IoMailOutline,
+  IoPaperPlaneOutline,
 } from "react-icons/io5";
 
 const DMView: React.FC = () => {

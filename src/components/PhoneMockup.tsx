@@ -3,17 +3,17 @@ import "./PhoneMockup.css";
 import type { Post } from "../types/index.ts";
 import CommentsView from "./CommentsView.tsx";
 import DMView from "./DMView.tsx";
-import { 
-  IoArrowBack, 
-  IoEllipsisHorizontal, 
-  IoHeart, 
-  IoChatbubbleOutline, 
-  IoPaperPlaneOutline, 
+import {
+  IoArrowBack,
+  IoEllipsisHorizontal,
+  IoHeart,
+  IoChatbubbleOutline,
+  IoPaperPlaneOutline,
   IoBookmarkOutline,
   IoHomeOutline,
   IoSearchOutline,
   IoAddOutline,
-  IoPersonOutline 
+  IoPersonOutline,
 } from "react-icons/io5";
 
 interface PhoneMockupProps {

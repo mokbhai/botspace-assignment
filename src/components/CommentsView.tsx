@@ -8,7 +8,7 @@ interface CommentsViewProps {
 }
 
 const CommentsView: React.FC<CommentsViewProps> = () => {
-  const [commentText, setCommentText] = useState('');
+  const [commentText, setCommentText] = useState("");
 
   const comments = [
     {
@@ -41,7 +41,7 @@ const CommentsView: React.FC<CommentsViewProps> = () => {
     },
   ];
 
-  const emojiReactions = ['❤️', '🙌', '🔥', '👏', '😍', '😂', '😮', '😢'];
+  const emojiReactions = ["❤️", "🙌", "🔥", "👏", "😍", "😂", "😮", "😢"];
 
   return (
     <div className="comments-view">
@@ -86,9 +86,9 @@ const CommentsView: React.FC<CommentsViewProps> = () => {
           <div className="avatar-circle"></div>
         </div>
         <div className="input-field">
-          <input 
-            type="text" 
-            placeholder="Add a comment for username..." 
+          <input
+            type="text"
+            placeholder="Add a comment for username..."
             value={commentText}
             onChange={(e) => setCommentText(e.target.value)}
           />
