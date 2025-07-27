@@ -14,31 +14,27 @@ const CommentsView: React.FC<CommentsViewProps> = ({ onClose }) => {
   const comments = [
     {
       id: 1,
-      username: "Username",
-      timeAgo: "Now",
+      user: "Username",
+      avatar:
+        "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMjAiIGN5PSIyMCIgcj0iMjAiIGZpbGw9IiM2NjYiLz4KPGNpcmNsZSBjeD0iMjAiIGN5PSIxNiIgcj0iNCIgZmlsbD0id2hpdGUiLz4KPHBhdGggZD0iTTEyIDI4IEwyOCAyOCIgc3Ryb2tlPSJ3aGl0ZSIgc3Ryb2tlLXdpZHRoPSIyIi8+Cjwvc3ZnPgo=",
       text: "Price",
-      isNew: true,
+      time: "Now",
     },
     {
       id: 2,
-      username: "johndoe_dev",
-      timeAgo: "2h",
-      text: "This is amazing! Love the automation features 🚀",
-      isNew: false,
+      user: "john_doe",
+      avatar:
+        "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMjAiIGN5PSIyMCIgcj0iMjAiIGZpbGw9IiM0Q0FGNTAiLz4KPGNpcmNsZSBjeD0iMjAiIGN5PSIxNiIgcj0iNCIgZmlsbD0id2hpdGUiLz4KPHBhdGggZD0iTTEyIDI4IEwyOCAyOCIgc3Ryb2tlPSJ3aGl0ZSIgc3Ryb2tlLXdpZHRoPSIyIi8+Cjwvc3ZnPgo=",
+      text: "This is amazing! 🎉",
+      time: "2m ago",
     },
     {
       id: 3,
-      username: "sarah_startup",
-      timeAgo: "1h",
-      text: "Can't wait to try this out with my team! 💪",
-      isNew: false,
-    },
-    {
-      id: 4,
-      username: "tech_wizard",
-      timeAgo: "45m",
-      text: "The collaboration features look incredible 🔥",
-      isNew: false,
+      user: "tech_lover",
+      avatar:
+        "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMjAiIGN5PSIyMCIgcj0iMjAiIGZpbGw9IiNGRjU3MjIiLz4KPGNpcmNsZSBjeD0iMjAiIGN5PSIxNiIgcj0iNCIgZmlsbD0id2hpdGUiLz4KPHBhdGggZD0iTTEyIDI4IEwyOCAyOCIgc3Ryb2tlPSJ3aGl0ZSIgc3Ryb2tlLXdpZHRoPSIyIi8+Cjwvc3ZnPgo=",
+      text: "Incredible milestone! WhatsApp is truly connecting the world 🌍",
+      time: "5m ago",
     },
   ];
 
@@ -67,21 +63,21 @@ const CommentsView: React.FC<CommentsViewProps> = ({ onClose }) => {
         {comments.map((comment) => (
           <div key={comment.id} className="comment-item">
             <div className="comment-avatar">
-              <div className="avatar-circle"></div>
+              <img src={comment.avatar} alt={`${comment.user} avatar`} />
             </div>
             <div className="comment-content">
               <div className="comment-header">
-                <span className="comment-username">{comment.username}</span>
-                <span className="comment-time">{comment.timeAgo}</span>
+                <span className="comment-username">{comment.user}</span>
+                <span className="comment-time">{comment.time}</span>
               </div>
               <div className="comment-text">{comment.text}</div>
               <div className="comment-actions">
                 <button className="reply-btn">Reply</button>
               </div>
             </div>
-            <div className="comment-like">
+            <button className="comment-like">
               <IoHeartOutline size={16} />
-            </div>
+            </button>
           </div>
         ))}
       </div>
@@ -96,7 +92,12 @@ const CommentsView: React.FC<CommentsViewProps> = ({ onClose }) => {
 
       <div className="comment-input">
         <div className="input-avatar">
-          <div className="avatar-circle"></div>
+          <div className="avatar-circle">
+            <img
+              src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMjAiIGN5PSIyMCIgcj0iMjAiIGZpbGw9IiM2NjYiLz4KPGNpcmNsZSBjeD0iMjAiIGN5PSIxNiIgcj0iNCIgZmlsbD0id2hpdGUiLz4KPHBhdGggZD0iTTEyIDI4IEwyOCAyOCIgc3Ryb2tlPSJ3aGl0ZSIgc3Ryb2tlLXdpZHRoPSIyIi8+Cjwvc3ZnPgo="
+              alt="User avatar"
+            />
+          </div>
         </div>
         <div className="input-field">
           <input

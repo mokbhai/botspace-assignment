@@ -26,14 +26,14 @@ const PhoneMockup: React.FC<PhoneMockupProps> = ({ selectedPost }) => {
 
   // Default post data if no post is selected
   const defaultPost: Post = {
-    id: 1,
+    id: 2,
     image:
       "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjQwMCIgdmlld0JveD0iMCAwIDQwMCA0MDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI0MDAiIGhlaWdodD0iNDAwIiBmaWxsPSIjMjVBRDcwIi8+CjxyZWN0IHk9IjgwIiB3aWR0aD0iNDAwIiBoZWlnaHQ9IjgwIiBmaWxsPSIjMjVBRDcwIi8+Cjx0ZXh0IHg9IjIwMCIgeT0iMTIwIiBmaWxsPSJ3aGl0ZSIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjE4IiBmb250LXdlaWdodD0iYm9sZCIgdGV4dC1hbmNob3I9Im1pZGRsZSI+V2hhdHNBcHAgaGl0cyAzIEJpbGxpb24gVXNlcnMhPC90ZXh0Pgo8Y2lyY2xlIGN4PSIzMDAiIGN5PSIxMDAiIHI9IjIwIiBmaWxsPSIjRkZGRkZGIi8+CjxjaXJjbGUgY3g9IjMyMCIgY3k9IjgwIiByPSIxNSIgZmlsbD0iI0ZGRkZGRiIvPgo8Y2lyY2xlIGN4PSIzNDAiIGN5PSIxMjAiIHI9IjEwIiBmaWxsPSIjRkZGRkZGIi8+CjxwYXRoIGQ9Ik0yMDAgMzAwIEwyNTAgMzUwIEwyMDAgMzUwIFoiIGZpbGw9IiMyNUFENzAiLz4KPHN2ZyB4PSIxNzUiIHk9IjI3NSIgd2lkdGg9IjUwIiBoZWlnaHQ9IjUwIiB2aWV3Qm94PSIwIDAgMjQgMjQiIGZpbGw9IndoaXRlIj4KPHBhdGggZD0iTTE3LjQ3MiAxNC4wMDJjLjM5OC0uNDczLjEwMi0xLjQ1LS40NDMtMS40NWgtNC4wNzVjLSUyLjU0NSAwLTQuNjA0IDIuMDYtNC42MDQgNC42MDR2NC4wNzVjMCAyLjU0NSAyLjA2IDQuNjA0IDQuNjA0IDQuNjA0aDQuMDc1YzIuNTQ1IDAgNC42MDQtMi4wNiA0LjYwNC00LjYwNHYtNC4wNzVjMC0uMjE5LS4wMTgtLjQzNS0uMDUyLS42NDdsMS4xNzQtMS4xNzR6bS0xLjQ1LTEuNDVjLS4zOTgtLjQ3My0xLjA0NS0uNTUyLTEuNTE4LS4xNTQtLjQ3My4zOTgtLjU1MiAxLjA0NS0uMTU0IDEuNTE4bC0xLjE3NCAxLjE3NGMtLjIxOS0uMDM0LS40MjgtLjA1Mi0uNjQ3LS4wNTJoLTQuMDc1Yy0yLjU0NSAwLTQuNjA0IDIuMDYtNC42MDQgNC42MDR2NC4wNzVjMCAyLjU0NSAyLjA2IDQuNjA0IDQuNjA0IDQuNjA0aDQuMDc1YzIuNTQ1IDAgNC42MDQtMi4wNiA0LjYwNC00LjYwNHYtNC4wNzVjMC0uMjE5LS4wMTgtLjQzNS0uMDUyLS42NDdsMS4xNzQtMS4xNzR6Ii8+Cjwvc3ZnPgo8L3N2Zz4K",
     user: "botspacehq",
     caption:
       "WhatsApp hits 3 Billion Users! 🎉 The messaging giant continues to dominate the global communication landscape. Green balloons and celebrations everywhere! 🎈",
     hashtags: "#WhatsApp #3Billion #Messaging #TechNews #BotSpace",
-    likes: 71,
+    likes: 18,
     comments: 22,
   };
 
@@ -111,7 +111,11 @@ const PhoneMockup: React.FC<PhoneMockupProps> = ({ selectedPost }) => {
                   <div className="post-text">
                     <span className="username">{currentPost.user}</span>
                     <span className="verified-badge">☑️</span>
-                    <span className="text">{currentPost.caption}</span>
+                    <span className="text">
+                      {currentPost.id === 2
+                        ? "WhatsApp hits 3 Billion Users! 🎉 Connecting 3 billion people worldwide. Meta's AI and business tools are revolutionizing how we communicate. BotSpace is proud to be a Meta Business Partner! 🚀"
+                        : currentPost.caption}
+                    </span>
                   </div>
                   <div className="hashtags">{currentPost.hashtags}</div>
                   <div className="view-comments" onClick={handleCommentClick}>
