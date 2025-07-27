@@ -19,12 +19,14 @@ import {
 interface PhoneMockupProps {
   selectedPost?: Post;
   showCommentsSection: boolean;
+  showDMSection: boolean;
   triggerWords: string[];
 }
 
 const PhoneMockup: React.FC<PhoneMockupProps> = ({
   selectedPost,
   showCommentsSection,
+  showDMSection,
   triggerWords,
 }) => {
   const [activeTab, setActiveTab] = useState("Post");
@@ -32,13 +34,16 @@ const PhoneMockup: React.FC<PhoneMockupProps> = ({
 
   // Automatically show comments when showCommentsSection is true
   React.useEffect(() => {
-    if (showCommentsSection) {
+    if (showDMSection) {
+      setActiveTab("DM");
+      setShowComments(false);
+    } else if (showCommentsSection) {
       setActiveTab("Comments");
       setShowComments(true);
     } else {
       setShowComments(false);
     }
-  }, [showCommentsSection]);
+  }, [showCommentsSection, showDMSection]);
 
   // Default post data if no post is selected
   const defaultPost: Post = {
@@ -158,7 +163,7 @@ const PhoneMockup: React.FC<PhoneMockupProps> = ({
             <CommentsView post={currentPost} triggerWords={triggerWords} />
           )}
 
-          {activeTab === "DM" && <DMView />}
+          {activeTab === "DM" && <DMView triggerWords={triggerWords} />}
         </div>
 
         <div className="phone-bottom-nav">

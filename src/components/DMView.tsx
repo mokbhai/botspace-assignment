@@ -7,8 +7,21 @@ import {
   IoPaperPlaneOutline,
 } from "react-icons/io5";
 
-const DMView: React.FC = () => {
+interface DMViewProps {
+  triggerWords?: string[];
+  editableMessage1?: string;
+  editableMessage2?: string;
+  editableMessage3?: string;
+  onMessage1Change?: (text: string) => void;
+  onMessage2Change?: (text: string) => void;
+  onMessage3Change?: (text: string) => void;
+}
+
+const DMView: React.FC<DMViewProps> = ({ triggerWords = [] }) => {
   const [messageText, setMessageText] = useState("");
+  const [editableMessage1, setEditableMessage1] = useState("Hey there! I'm so happy you're here, thanks so much for your interest 😊");
+  const [editableMessage2, setEditableMessage2] = useState("Click below and I'll send you the link in just a sec 🔗");
+  const [editableMessage3, setEditableMessage3] = useState("Send me the link");
 
   const conversations = [
     {
@@ -40,41 +53,80 @@ const DMView: React.FC = () => {
     },
   ];
 
-  const messages = [
-    {
-      id: 1,
-      text: "Hey! Loved your latest post about automation 🚀",
-      sender: "sarah_dev",
-      time: "2:45 PM",
-      isOwn: false,
-    },
-    {
-      id: 2,
-      text: "Thank you! We're really excited about what we're building",
-      sender: "botspacehq",
-      time: "2:47 PM",
-      isOwn: true,
-    },
-    {
-      id: 3,
-      text: "The team collaboration features look amazing. When will they be available?",
-      sender: "sarah_dev",
-      time: "2:48 PM",
-      isOwn: false,
-    },
-    {
-      id: 4,
-      text: "We're planning to launch them next month! Stay tuned for updates 😊",
-      sender: "botspacehq",
-      time: "2:50 PM",
-      isOwn: true,
-    },
-  ];
+  // Generate dynamic messages based on trigger words
+  const generateMessagesFromTriggerWords = () => {
+    if (!triggerWords || triggerWords.length === 0) {
+      return [
+        {
+          id: 1,
+          text: "Hey there! I'm so happy you're here, thanks so much for your interest �",
+          sender: "botspacehq",
+          time: "2:45 PM",
+          isOwn: true,
+        },
+        {
+          id: 2,
+          text: editableMessage2,
+          sender: "botspacehq",
+          time: "2:46 PM",
+          isOwn: true,
+        },
+        {
+          id: 3,
+          text: editableMessage3,
+          sender: "botspacehq",
+          time: "2:47 PM",
+          isOwn: true,
+          isButton: true,
+        },
+      ];
+    }
+
+    const baseMessages = [
+      {
+        id: 1,
+        text: editableMessage1,
+        sender: "botspacehq",
+        time: "2:45 PM",
+        isOwn: true,
+      },
+      {
+        id: 2,
+        text: editableMessage2,
+        sender: "botspacehq",
+        time: "2:46 PM",
+        isOwn: true,
+      },
+      {
+        id: 3,
+        text: editableMessage3,
+        sender: "botspacehq",
+        time: "2:47 PM",
+        isOwn: true,
+        isButton: true,
+      },
+    ];
+
+    // Add messages for each trigger word
+    triggerWords.forEach((word) => {
+      baseMessages.push({
+        id: baseMessages.length + 1,
+        text: word,
+        sender: "Username",
+        time: "Now",
+        isOwn: false,
+      });
+    });
+
+    return baseMessages;
+  };
+
+  const messages = generateMessagesFromTriggerWords();
 
   const [selectedConversation, setSelectedConversation] = useState(
     conversations[0]
   );
-  const [showConversations, setShowConversations] = useState(true);
+  const [showConversations, setShowConversations] = useState(false);
 
   const handleSendMessage = () => {
     if (messageText.trim()) {
@@ -157,7 +209,13 @@ const DMView: React.FC = () => {
                 className={`message ${message.isOwn ? "own" : "other"}`}
               >
                 <div className="message-bubble">
-                  <div className="message-text">{message.text}</div>
+                  {message.isButton ? (
+                    <button className="message-button">
+                      {message.text}
+                    </button>
+                  ) : (
+                    <div className="message-text">{message.text}</div>
+                  )}
                   <div className="message-time">{message.time}</div>
                 </div>
               </div>

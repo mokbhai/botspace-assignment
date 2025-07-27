@@ -6,6 +6,7 @@ interface SidebarProps {
   onPostSelect: (post: Post) => void;
   selectedPostId?: number;
   onCommentsVisibilityChange: (visible: boolean) => void;
+  onDMVisibilityChange: (visible: boolean) => void;
   onTriggerWordsChange: (words: string[]) => void;
 }
 
@@ -13,10 +14,12 @@ const Sidebar: React.FC<SidebarProps> = ({
   onPostSelect,
   selectedPostId,
   onCommentsVisibilityChange,
+  onDMVisibilityChange,
   onTriggerWordsChange,
 }) => {
   const [selectedOption, setSelectedOption] = useState("specific");
   const [showSecondSection, setShowSecondSection] = useState(false);
+  const [showThirdSection, setShowThirdSection] = useState(false);
   const [commentTrigger, setCommentTrigger] = useState("specific");
   const [triggerWords, setTriggerWords] = useState("Price, Link, Shop");
   const [tags, setTags] = useState(["Price", "Link", "Shop"]);
@@ -78,9 +81,21 @@ const Sidebar: React.FC<SidebarProps> = ({
     onCommentsVisibilityChange(true);
   };
 
-  const handleBackClick = () => {
-    setShowSecondSection(false);
+  const handleSecondNextClick = () => {
+    setShowThirdSection(true);
     onCommentsVisibilityChange(false);
+    onDMVisibilityChange(true);
+  };
+
+  const handleBackClick = () => {
+    if (showThirdSection) {
+      setShowThirdSection(false);
+      onDMVisibilityChange(false);
+      onCommentsVisibilityChange(true);
+    } else {
+      setShowSecondSection(false);
+      onCommentsVisibilityChange(false);
+    }
   };
 
   const handleInputChange = (value: string) => {
@@ -173,7 +188,7 @@ const Sidebar: React.FC<SidebarProps> = ({
             </button>
           </div>
         </>
-      ) : (
+      ) : !showThirdSection ? (
         <>
           <div className="section-header">
             <button className="back-btn" onClick={handleBackClick}>
@@ -233,6 +248,72 @@ const Sidebar: React.FC<SidebarProps> = ({
               <span className="radio-custom"></span>
               <span className="option-text">any word</span>
             </label>
+          </div>
+
+          <div className="next-section">
+            <button className="next-btn" onClick={handleSecondNextClick}>
+              Next
+            </button>
+          </div>
+        </>
+      ) : (
+        <>
+          <div className="section-header">
+            <button className="back-btn" onClick={handleBackClick}>
+              ← Back
+            </button>
+            <h2>They will get</h2>
+          </div>
+
+          <div className="option-group">
+            <label className="radio-option">
+              <input
+                type="radio"
+                name="dmType"
+                value="opening"
+                checked={true}
+                readOnly
+              />
+              <span className="radio-custom"></span>
+              <span className="option-text">an opening DM</span>
+              <div className="toggle-switch">
+                <input type="checkbox" defaultChecked />
+                <span className="slider"></span>
+              </div>
+            </label>
+
+            <div className="dm-preview">
+              <p>Hey there! I'm so happy you're here, thanks so much for your interest 😊</p>
+              <p>Click below and I'll send you the link in just a sec 🔗</p>
+              <button className="dm-link-btn">Send me the link</button>
+            </div>
+          </div>
+
+          <div className="dm-options">
+            <p>🛈 Why does an Opening DM matter?</p>
+            
+            <label className="radio-option">
+              <input
+                type="radio"
+                name="dmType"
+                value="link"
+                checked={false}
+                readOnly
+              />
+              <span className="radio-custom"></span>
+              <span className="option-text">a DM with the link</span>
+            </label>
+
+            <div className="dm-input">
+              <input
+                type="text"
+                value="Hey"
+                readOnly
+                className="dm-text-input"
+              />
+              <p className="dm-hint">Create the DM you'd like to send</p>
+              <button className="add-link-btn">+ Add A Link</button>
+            </div>
           </div>
 
           <div className="next-section">

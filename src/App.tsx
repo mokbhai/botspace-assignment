@@ -7,6 +7,7 @@ import type { Post } from "./types/index.ts";
 function App() {
   const [selectedPost, setSelectedPost] = useState<Post | undefined>(undefined);
   const [showCommentsSection, setShowCommentsSection] = useState(false);
+  const [showDMSection, setShowDMSection] = useState(false);
   const [triggerWords, setTriggerWords] = useState<string[]>(["Price"]);
 
   const handlePostSelect = (post: Post) => {
@@ -15,6 +16,10 @@ function App() {
 
   const handleCommentsVisibility = (visible: boolean) => {
     setShowCommentsSection(visible);
+  };
+
+  const handleDMVisibility = (visible: boolean) => {
+    setShowDMSection(visible);
   };
 
   const handleTriggerWordsChange = (words: string[]) => {
@@ -28,6 +33,7 @@ function App() {
           onPostSelect={handlePostSelect}
           selectedPostId={selectedPost?.id}
           onCommentsVisibilityChange={handleCommentsVisibility}
+          onDMVisibilityChange={handleDMVisibility}
           onTriggerWordsChange={handleTriggerWordsChange}
         />
         <div className="preview-section">
@@ -38,6 +44,7 @@ function App() {
           <PhoneMockup
             selectedPost={selectedPost}
             showCommentsSection={showCommentsSection}
+            showDMSection={showDMSection}
             triggerWords={triggerWords}
           />
         </div>
