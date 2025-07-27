@@ -8,7 +8,11 @@ function App() {
   const [selectedPost, setSelectedPost] = useState<Post | undefined>(undefined);
   const [showCommentsSection, setShowCommentsSection] = useState(false);
   const [showDMSection, setShowDMSection] = useState(false);
-  const [triggerWords, setTriggerWords] = useState<string[]>(["Price"]);
+  const [triggerWords, setTriggerWords] = useState<string[]>([
+    "Price",
+    "Link",
+    "Shop",
+  ]);
 
   const handlePostSelect = (post: Post) => {
     setSelectedPost(post);

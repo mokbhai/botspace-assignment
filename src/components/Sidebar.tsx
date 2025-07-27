@@ -23,6 +23,13 @@ const Sidebar: React.FC<SidebarProps> = ({
   const [commentTrigger, setCommentTrigger] = useState("specific");
   const [triggerWords, setTriggerWords] = useState("Price, Link, Shop");
   const [tags, setTags] = useState(["Price", "Link", "Shop"]);
+  const [dmMessage1, setDmMessage1] = useState(
+    "Hey there! I'm so happy you're here, thanks so much for your interest 😊"
+  );
+  const [dmMessage2, setDmMessage2] = useState(
+    "Click below and I'll send you the link in just a sec 🔗"
+  );
+  const [dmLinkText, setDmLinkText] = useState("Hey");
 
   const posts: Post[] = [
     {
@@ -283,15 +290,25 @@ const Sidebar: React.FC<SidebarProps> = ({
             </label>
 
             <div className="dm-preview">
-              <p>Hey there! I'm so happy you're here, thanks so much for your interest 😊</p>
-              <p>Click below and I'll send you the link in just a sec 🔗</p>
+              <textarea
+                value={dmMessage1}
+                onChange={(e) => setDmMessage1(e.target.value)}
+                className="dm-textarea"
+                rows={2}
+              />
+              <textarea
+                value={dmMessage2}
+                onChange={(e) => setDmMessage2(e.target.value)}
+                className="dm-textarea"
+                rows={1}
+              />
               <button className="dm-link-btn">Send me the link</button>
             </div>
           </div>
 
           <div className="dm-options">
             <p>🛈 Why does an Opening DM matter?</p>
-            
+
             <label className="radio-option">
               <input
                 type="radio"
@@ -307,8 +324,8 @@ const Sidebar: React.FC<SidebarProps> = ({
             <div className="dm-input">
               <input
                 type="text"
-                value="Hey"
-                readOnly
+                value={dmLinkText}
+                onChange={(e) => setDmLinkText(e.target.value)}
                 className="dm-text-input"
               />
               <p className="dm-hint">Create the DM you'd like to send</p>

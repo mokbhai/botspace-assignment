@@ -9,19 +9,18 @@ import {
 
 interface DMViewProps {
   triggerWords?: string[];
-  editableMessage1?: string;
-  editableMessage2?: string;
-  editableMessage3?: string;
-  onMessage1Change?: (text: string) => void;
-  onMessage2Change?: (text: string) => void;
-  onMessage3Change?: (text: string) => void;
 }
 
 const DMView: React.FC<DMViewProps> = ({ triggerWords = [] }) => {
   const [messageText, setMessageText] = useState("");
-  const [editableMessage1, setEditableMessage1] = useState("Hey there! I'm so happy you're here, thanks so much for your interest 😊");
-  const [editableMessage2, setEditableMessage2] = useState("Click below and I'll send you the link in just a sec 🔗");
+  const [editableMessage1, setEditableMessage1] = useState(
+    "Hey there! I'm so happy you're here, thanks so much for your interest 😊"
+  );
+  const [editableMessage2, setEditableMessage2] = useState(
+    "Click below and I'll send you the link in just a sec 🔗"
+  );
   const [editableMessage3, setEditableMessage3] = useState("Send me the link");
+  const [isEditingMessages, setIsEditingMessages] = useState(false);
 
   const conversations = [
     {
@@ -197,10 +196,47 @@ const DMView: React.FC<DMViewProps> = ({ triggerWords = [] }) => {
               />
               <span>{selectedConversation.username}</span>
             </div>
-            <button className="chat-options">
-              <IoEllipsisHorizontal size={20} />
-            </button>
+            <div className="chat-header-actions">
+              <button
+                className="edit-messages-btn"
+                onClick={() => setIsEditingMessages(!isEditingMessages)}
+              >
+                {isEditingMessages ? "Done" : "Edit"}
+              </button>
+              <button className="chat-options">
+                <IoEllipsisHorizontal size={20} />
+              </button>
+            </div>
           </div>
+
+          {isEditingMessages && (
+            <div className="edit-messages-panel">
+              <div className="edit-field">
+                <label>Message 1:</label>
+                <textarea
+                  value={editableMessage1}
+                  onChange={(e) => setEditableMessage1(e.target.value)}
+                  rows={2}
+                />
+              </div>
+              <div className="edit-field">
+                <label>Message 2:</label>
+                <textarea
+                  value={editableMessage2}
+                  onChange={(e) => setEditableMessage2(e.target.value)}
+                  rows={2}
+                />
+              </div>
+              <div className="edit-field">
+                <label>Button Text:</label>
+                <input
+                  type="text"
+                  value={editableMessage3}
+                  onChange={(e) => setEditableMessage3(e.target.value)}
+                />
+              </div>
+            </div>
+          )}
 
           <div className="messages-container">
             {messages.map((message) => (
@@ -210,9 +246,7 @@ const DMView: React.FC<DMViewProps> = ({ triggerWords = [] }) => {
               >
                 <div className="message-bubble">
                   {message.isButton ? (
-                    <button className="message-button">
-                      {message.text}
-                    </button>
+                    <button className="message-button">{message.text}</button>
                   ) : (
                     <div className="message-text">{message.text}</div>
                   )}

@@ -332,6 +332,18 @@
   line-height: 1.4;
 }
 
+.dm-textarea {
+  width: 100%;
+  margin: 8px 0;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+  font-family: inherit;
+  resize: vertical;
+  min-height: 40px;
+}
+
 .dm-link-btn {
   background-color: #007bff;
   color: white;

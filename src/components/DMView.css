@@ -131,6 +131,62 @@
   gap: 15px;
   padding: 15px;
   border-bottom: 1px solid #333;
+  justify-content: space-between;
+}
+
+.chat-user-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.chat-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.edit-messages-btn {
+  background: #007bff;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.edit-messages-btn:hover {
+  background: #0056b3;
+}
+
+.edit-messages-panel {
+  padding: 15px;
+  background: #111;
+  border-bottom: 1px solid #333;
+}
+
+.edit-field {
+  margin-bottom: 15px;
+}
+
+.edit-field label {
+  display: block;
+  color: #ccc;
+  font-size: 12px;
+  margin-bottom: 5px;
+}
+
+.edit-field textarea,
+.edit-field input {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #555;
+  background: #222;
+  color: white;
+  border-radius: 4px;
+  font-size: 14px;
+  resize: vertical;
 }
 
 .back-btn {
