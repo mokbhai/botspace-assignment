@@ -6,37 +6,32 @@ import { IoClose, IoPaperPlaneOutline, IoHeartOutline } from "react-icons/io5";
 interface CommentsViewProps {
   post: Post;
   onClose?: () => void;
+  triggerWords: string[];
 }
 
-const CommentsView: React.FC<CommentsViewProps> = ({ onClose }) => {
+const CommentsView: React.FC<CommentsViewProps> = ({
+  onClose,
+  triggerWords,
+}) => {
   const [commentText, setCommentText] = useState("");
 
-  const comments = [
-    {
-      id: 1,
+  // Generate dynamic comments based on trigger words
+  const generateCommentsFromTriggerWords = () => {
+    if (!triggerWords || triggerWords.length === 0) {
+      return [];
+    }
+
+    return triggerWords.map((word, index) => ({
+      id: index + 1,
       user: "Username",
       avatar:
         "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMjAiIGN5PSIyMCIgcj0iMjAiIGZpbGw9IiM2NjYiLz4KPGNpcmNsZSBjeD0iMjAiIGN5PSIxNiIgcj0iNCIgZmlsbD0id2hpdGUiLz4KPHBhdGggZD0iTTEyIDI4IEwyOCAyOCIgc3Ryb2tlPSJ3aGl0ZSIgc3Ryb2tlLXdpZHRoPSIyIi8+Cjwvc3ZnPgo=",
-      text: "Price",
+      text: word,
       time: "Now",
-    },
-    {
-      id: 2,
-      user: "john_doe",
-      avatar:
-        "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMjAiIGN5PSIyMCIgcj0iMjAiIGZpbGw9IiM0Q0FGNTAiLz4KPGNpcmNsZSBjeD0iMjAiIGN5PSIxNiIgcj0iNCIgZmlsbD0id2hpdGUiLz4KPHBhdGggZD0iTTEyIDI4IEwyOCAyOCIgc3Ryb2tlPSJ3aGl0ZSIgc3Ryb2tlLXdpZHRoPSIyIi8+Cjwvc3ZnPgo=",
-      text: "This is amazing! 🎉",
-      time: "2m ago",
-    },
-    {
-      id: 3,
-      user: "tech_lover",
-      avatar:
-        "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMjAiIGN5PSIyMCIgcj0iMjAiIGZpbGw9IiNGRjU3MjIiLz4KPGNpcmNsZSBjeD0iMjAiIGN5PSIxNiIgcj0iNCIgZmlsbD0id2hpdGUiLz4KPHBhdGggZD0iTTEyIDI4IEwyOCAyOCIgc3Ryb2tlPSJ3aGl0ZSIgc3Ryb2tlLXdpZHRoPSIyIi8+Cjwvc3ZnPgo=",
-      text: "Incredible milestone! WhatsApp is truly connecting the world 🌍",
-      time: "5m ago",
-    },
-  ];
+    }));
+  };
+
+  const comments = generateCommentsFromTriggerWords();
 
   const emojiReactions = ["❤️", "🙌", "🔥", "🌮", "😢", "😍", "🙄", "😂"];
 
@@ -60,26 +55,35 @@ const CommentsView: React.FC<CommentsViewProps> = ({ onClose }) => {
       </div>
 
       <div className="comments-list">
-        {comments.map((comment) => (
-          <div key={comment.id} className="comment-item">
-            <div className="comment-avatar">
-              <img src={comment.avatar} alt={`${comment.user} avatar`} />
-            </div>
-            <div className="comment-content">
-              <div className="comment-header">
-                <span className="comment-username">{comment.user}</span>
-                <span className="comment-time">{comment.time}</span>
-              </div>
-              <div className="comment-text">{comment.text}</div>
-              <div className="comment-actions">
-                <button className="reply-btn">Reply</button>
-              </div>
-            </div>
-            <button className="comment-like">
-              <IoHeartOutline size={16} />
-            </button>
+        {comments.length === 0 ? (
+          <div className="empty-comments">
+            <p>
+              No comments yet. Comments will appear here when users type the
+              trigger words.
+            </p>
           </div>
-        ))}
+        ) : (
+          comments.map((comment) => (
+            <div key={comment.id} className="comment-item">
+              <div className="comment-avatar">
+                <img src={comment.avatar} alt={`${comment.user} avatar`} />
+              </div>
+              <div className="comment-content">
+                <div className="comment-header">
+                  <span className="comment-username">{comment.user}</span>
+                  <span className="comment-time">{comment.time}</span>
+                </div>
+                <div className="comment-text">{comment.text}</div>
+                <div className="comment-actions">
+                  <button className="reply-btn">Reply</button>
+                </div>
+              </div>
+              <button className="comment-like">
+                <IoHeartOutline size={16} />
+              </button>
+            </div>
+          ))
+        )}
       </div>
 
       <div className="emoji-reactions">

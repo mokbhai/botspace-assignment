@@ -5,9 +5,16 @@ import type { Post } from "../types/index.ts";
 interface SidebarProps {
   onPostSelect: (post: Post) => void;
   selectedPostId?: number;
+  onCommentsVisibilityChange: (visible: boolean) => void;
+  onTriggerWordsChange: (words: string[]) => void;
 }
 
-const Sidebar: React.FC<SidebarProps> = ({ onPostSelect, selectedPostId }) => {
+const Sidebar: React.FC<SidebarProps> = ({
+  onPostSelect,
+  selectedPostId,
+  onCommentsVisibilityChange,
+  onTriggerWordsChange,
+}) => {
   const [selectedOption, setSelectedOption] = useState("specific");
   const [showSecondSection, setShowSecondSection] = useState(false);
   const [commentTrigger, setCommentTrigger] = useState("specific");
@@ -68,10 +75,12 @@ const Sidebar: React.FC<SidebarProps> = ({ onPostSelect, selectedPostId }) => {
 
   const handleNextClick = () => {
     setShowSecondSection(true);
+    onCommentsVisibilityChange(true);
   };
 
   const handleBackClick = () => {
     setShowSecondSection(false);
+    onCommentsVisibilityChange(false);
   };
 
   const handleInputChange = (value: string) => {
@@ -82,11 +91,17 @@ const Sidebar: React.FC<SidebarProps> = ({ onPostSelect, selectedPostId }) => {
       .map((word) => word.trim())
       .filter((word) => word.length > 0);
     setTags(newTags.length > 0 ? newTags : ["Price"]);
+    // Notify parent component about trigger words change
+    onTriggerWordsChange(newTags.length > 0 ? newTags : ["Price"]);
   };
 
   const removeTag = (tagToRemove: string) => {
-    setTags(tags.filter((tag) => tag !== tagToRemove));
-    setTriggerWords(tags.filter((tag) => tag !== tagToRemove).join(", "));
+    const updatedTags = tags.filter((tag) => tag !== tagToRemove);
+    setTags(updatedTags);
+    const updatedWords = updatedTags.join(", ");
+    setTriggerWords(updatedWords);
+    // Notify parent component about trigger words change
+    onTriggerWordsChange(updatedTags);
   };
 
   return (

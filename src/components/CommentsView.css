@@ -4,9 +4,8 @@
   bottom: 0;
   left: 0;
   right: 0;
-  background: linear-gradient(to bottom, #1a1a1a, #000);
+  background: linear-gradient(180deg, #1a1a1a 0%, #2d2d2d 100%);
   border-radius: 20px 20px 0 0;
-  padding: 0;
   height: 70%;
   display: flex;
   flex-direction: column;
@@ -37,43 +36,40 @@
 /* Comments Header */
 .comments-header {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  padding: 0 20px 15px 20px;
+  justify-content: space-between;
+  padding: 0 20px 15px;
   border-bottom: 1px solid #333;
 }
 
 .comments-header h3 {
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 600;
-  color: white;
+  color: #fff;
   margin: 0;
 }
 
 .header-actions {
   display: flex;
-  gap: 15px;
   align-items: center;
+  gap: 10px;
 }
 
 .send-btn,
 .close-btn {
   background: none;
   border: none;
-  color: #888;
-  cursor: pointer;
-  padding: 5px;
+  color: #fff;
+  padding: 6px;
   border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  cursor: pointer;
   transition: all 0.2s ease;
+  font-size: 16px;
 }
 
 .send-btn:hover,
 .close-btn:hover {
-  color: white;
-  background-color: #333;
+  background-color: rgba(255, 255, 255, 0.1);
 }
 
 /* Comments List */
@@ -83,25 +79,37 @@
   padding: 15px 20px;
 }
 
+.empty-comments {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  text-align: center;
+}
+
+.empty-comments p {
+  color: #999;
+  font-size: 14px;
+  line-height: 1.5;
+  margin: 0;
+}
+
 .comment-item {
   display: flex;
-  gap: 12px;
-  margin-bottom: 20px;
   align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 15px;
 }
 
 .comment-avatar {
-  width: 32px;
-  height: 32px;
   flex-shrink: 0;
 }
 
-.avatar-circle {
+.comment-avatar img {
   width: 32px;
   height: 32px;
   border-radius: 50%;
-  background-color: #444;
-  border: 1px solid #666;
+  object-fit: cover;
 }
 
 .comment-content {
@@ -112,112 +120,122 @@
 .comment-header {
   display: flex;
   align-items: center;
-  gap: 10px;
-  margin-bottom: 5px;
+  gap: 8px;
+  margin-bottom: 4px;
 }
 
 .comment-username {
+  font-size: 12px;
   font-weight: 600;
-  font-size: 14px;
-  color: white;
+  color: #fff;
 }
 
 .comment-time {
-  font-size: 12px;
-  color: #888;
+  font-size: 11px;
+  color: #999;
 }
 
 .comment-text {
-  font-size: 14px;
+  font-size: 13px;
+  color: #fff;
   line-height: 1.4;
-  margin-bottom: 8px;
-  color: #ccc;
+  margin-bottom: 6px;
 }
 
 .comment-actions {
-  margin-top: 5px;
+  margin-top: 4px;
 }
 
 .reply-btn {
   background: none;
   border: none;
-  color: #888;
-  font-size: 12px;
+  color: #999;
+  font-size: 11px;
   cursor: pointer;
   padding: 0;
-  text-decoration: none;
+  text-decoration: underline;
 }
 
 .reply-btn:hover {
-  color: white;
+  color: #fff;
 }
 
 .comment-like {
-  padding: 5px;
+  background: none;
+  border: none;
+  color: #999;
+  padding: 4px;
   cursor: pointer;
-  color: #888;
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 50%;
-  width: 30px;
-  height: 30px;
+  width: 24px;
+  height: 24px;
   transition: all 0.2s ease;
+  font-size: 12px;
 }
 
 .comment-like:hover {
-  color: #ff4757;
-  background-color: rgba(255, 71, 87, 0.1);
+  background-color: rgba(255, 255, 255, 0.1);
+  color: #fff;
 }
 
 /* Emoji Reactions */
 .emoji-reactions {
   display: flex;
   gap: 8px;
-  padding: 15px 20px;
-  justify-content: space-around;
-  border-top: 1px solid #333;
+  padding: 10px 20px;
+  border-bottom: 1px solid #333;
 }
 
 .emoji-btn {
   background: none;
   border: none;
-  font-size: 20px;
+  font-size: 16px;
+  padding: 6px;
   cursor: pointer;
-  padding: 5px;
+  width: 32px;
+  height: 32px;
   border-radius: 50%;
-  width: 35px;
-  height: 35px;
+  transition: all 0.2s ease;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.2s ease;
 }
 
 .emoji-btn:hover {
-  background-color: #333;
+  background-color: rgba(255, 255, 255, 0.1);
   transform: scale(1.1);
 }
 
 /* Comment Input */
 .comment-input {
   display: flex;
-  gap: 10px;
   align-items: center;
+  gap: 12px;
   padding: 15px 20px;
-  border-top: 1px solid #333;
-  background-color: #000;
 }
 
 .input-avatar {
-  width: 32px;
-  height: 32px;
   flex-shrink: 0;
 }
 
 .input-avatar .avatar-circle {
   width: 32px;
   height: 32px;
+  border-radius: 50%;
+  background-color: #333;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.input-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .input-field {
@@ -226,17 +244,17 @@
 
 .input-field input {
   width: 100%;
-  background: #222;
-  border: 1px solid #444;
+  background-color: #333;
+  border: none;
   border-radius: 20px;
-  padding: 12px 16px;
-  color: white;
-  font-size: 14px;
+  padding: 10px 15px;
+  color: #fff;
+  font-size: 13px;
   outline: none;
 }
 
 .input-field input::placeholder {
-  color: #888;
+  color: #999;
 }
 
 .input-field input:focus {
@@ -254,75 +272,48 @@
 }
 
 .comments-view .comments-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 20px;
-  padding-bottom: 15px;
-  border-bottom: 1px solid #333;
+  padding: 20px;
+  border-bottom: 1px solid #e9ecef;
 }
 
 .comments-view .comments-header h3 {
   font-size: 18px;
-  font-weight: 600;
-  color: white;
+  color: #333;
 }
 
-.filter-dropdown {
-  background: #333;
-  border-radius: 15px;
-  padding: 8px 12px;
-  cursor: pointer;
+.comments-view .header-actions {
+  gap: 15px;
 }
 
-.filter-dropdown span {
-  font-size: 12px;
-  color: #888;
+.comments-view .send-btn,
+.comments-view .close-btn {
+  padding: 8px;
+  font-size: 18px;
+  color: #333;
 }
 
 .comments-view .comments-list {
-  flex: 1;
-  overflow-y: auto;
-  margin-bottom: 15px;
+  padding: 20px;
 }
 
 .comments-view .comment-item {
-  display: flex;
-  gap: 12px;
+  gap: 15px;
   margin-bottom: 20px;
-  align-items: flex-start;
 }
 
-.comments-view .comment-avatar {
+.comments-view .comment-avatar img {
   width: 40px;
   height: 40px;
-  flex-shrink: 0;
-}
-
-.comments-view .avatar-circle {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background-color: #444;
-  border: 2px solid #666;
-}
-
-.comments-view .comment-content {
-  flex: 1;
-  min-width: 0;
 }
 
 .comments-view .comment-header {
-  display: flex;
-  align-items: center;
   gap: 10px;
-  margin-bottom: 5px;
+  margin-bottom: 6px;
 }
 
 .comments-view .comment-username {
-  font-weight: 600;
   font-size: 14px;
-  color: white;
+  color: #333;
 }
 
 .new-badge {
@@ -337,14 +328,14 @@
 
 .comments-view .comment-text {
   font-size: 14px;
-  line-height: 1.4;
-  margin-bottom: 5px;
-  color: #ccc;
+  color: #333;
+  line-height: 1.5;
+  margin-bottom: 8px;
 }
 
 .comments-view .comment-time {
   font-size: 12px;
-  color: #888;
+  color: #666;
 }
 
 .comment-menu {
@@ -358,70 +349,28 @@
 }
 
 .comments-view .emoji-reactions {
-  display: flex;
-  gap: 8px;
-  margin-bottom: 15px;
-  padding: 10px 0;
-  justify-content: space-around;
+  gap: 10px;
+  padding: 15px 20px;
 }
 
 .comments-view .emoji-btn {
-  background: none;
-  border: none;
-  font-size: 20px;
-  cursor: pointer;
-  padding: 5px;
-  border-radius: 50%;
-  width: 35px;
-  height: 35px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: background-color 0.2s ease;
-}
-
-.comments-view .emoji-btn:hover {
-  background-color: #333;
+  font-size: 18px;
+  padding: 8px;
+  width: 36px;
+  height: 36px;
 }
 
 .comments-view .comment-input {
-  display: flex;
-  gap: 10px;
-  align-items: center;
-  padding-top: 15px;
-  border-top: 1px solid #333;
-}
-
-.comments-view .input-avatar {
-  width: 32px;
-  height: 32px;
-  flex-shrink: 0;
+  gap: 15px;
+  padding: 20px;
 }
 
 .comments-view .input-avatar .avatar-circle {
-  width: 32px;
-  height: 32px;
-}
-
-.comments-view .input-field {
-  flex: 1;
+  width: 40px;
+  height: 40px;
 }
 
 .comments-view .input-field input {
-  width: 100%;
-  background: #222;
-  border: 1px solid #444;
-  border-radius: 20px;
-  padding: 12px 16px;
-  color: white;
+  padding: 12px 18px;
   font-size: 14px;
-}
-
-.comments-view .input-field input::placeholder {
-  color: #888;
-}
-
-.comments-view .input-field input:focus {
-  outline: none;
-  border-color: #1976d2;
 }

@@ -18,11 +18,27 @@ import {
 
 interface PhoneMockupProps {
   selectedPost?: Post;
+  showCommentsSection: boolean;
+  triggerWords: string[];
 }
 
-const PhoneMockup: React.FC<PhoneMockupProps> = ({ selectedPost }) => {
+const PhoneMockup: React.FC<PhoneMockupProps> = ({
+  selectedPost,
+  showCommentsSection,
+  triggerWords,
+}) => {
   const [activeTab, setActiveTab] = useState("Post");
   const [showComments, setShowComments] = useState(false);
+
+  // Automatically show comments when showCommentsSection is true
+  React.useEffect(() => {
+    if (showCommentsSection) {
+      setActiveTab("Comments");
+      setShowComments(true);
+    } else {
+      setShowComments(false);
+    }
+  }, [showCommentsSection]);
 
   // Default post data if no post is selected
   const defaultPost: Post = {
@@ -131,13 +147,16 @@ const PhoneMockup: React.FC<PhoneMockupProps> = ({ selectedPost }) => {
                   <CommentsView
                     post={currentPost}
                     onClose={() => setShowComments(false)}
+                    triggerWords={triggerWords}
                   />
                 </div>
               )}
             </>
           )}
 
-          {activeTab === "Comments" && <CommentsView post={currentPost} />}
+          {activeTab === "Comments" && (
+            <CommentsView post={currentPost} triggerWords={triggerWords} />
+          )}
 
           {activeTab === "DM" && <DMView />}
         </div>
