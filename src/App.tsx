@@ -13,6 +13,9 @@ function App() {
     "Link",
     "Shop",
   ]);
+  const [dmMessage, setDmMessage] = useState(
+    "Hey there! I'm so happy you're here, thanks so much for your interest 😊\n\nClick below and I'll send you the link in just a sec 🔗"
+  );
 
   const handlePostSelect = (post: Post) => {
     setSelectedPost(post);
@@ -30,6 +33,10 @@ function App() {
     setTriggerWords(words);
   };
 
+  const handleDMMessageChange = (message: string) => {
+    setDmMessage(message);
+  };
+
   return (
     <div className="app">
       <div className="container">
@@ -39,6 +46,7 @@ function App() {
           onCommentsVisibilityChange={handleCommentsVisibility}
           onDMVisibilityChange={handleDMVisibility}
           onTriggerWordsChange={handleTriggerWordsChange}
+          onDMMessageChange={handleDMMessageChange}
         />
         <div className="preview-section">
           <div className="preview-header">
@@ -50,6 +58,7 @@ function App() {
             showCommentsSection={showCommentsSection}
             showDMSection={showDMSection}
             triggerWords={triggerWords}
+            dmMessage={dmMessage}
           />
         </div>
       </div>

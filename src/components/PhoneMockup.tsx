@@ -21,6 +21,7 @@ interface PhoneMockupProps {
   showCommentsSection: boolean;
   showDMSection: boolean;
   triggerWords: string[];
+  dmMessage: string;
 }
 
 const PhoneMockup: React.FC<PhoneMockupProps> = ({
@@ -28,6 +29,7 @@ const PhoneMockup: React.FC<PhoneMockupProps> = ({
   showCommentsSection,
   showDMSection,
   triggerWords,
+  dmMessage,
 }) => {
   const [activeTab, setActiveTab] = useState("Post");
   const [showComments, setShowComments] = useState(false);
@@ -163,7 +165,9 @@ const PhoneMockup: React.FC<PhoneMockupProps> = ({
             <CommentsView post={currentPost} triggerWords={triggerWords} />
           )}
 
-          {activeTab === "DM" && <DMView triggerWords={triggerWords} />}
+          {activeTab === "DM" && (
+            <DMView triggerWords={triggerWords} dmMessage={dmMessage} />
+          )}
         </div>
 
         <div className="phone-bottom-nav">

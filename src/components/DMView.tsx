@@ -9,16 +9,11 @@ import {
 
 interface DMViewProps {
   triggerWords?: string[];
+  dmMessage: string;
 }
 
-const DMView: React.FC<DMViewProps> = ({ triggerWords = [] }) => {
+const DMView: React.FC<DMViewProps> = ({ triggerWords = [], dmMessage }) => {
   const [messageText, setMessageText] = useState("");
-  const [editableMessage1, setEditableMessage1] = useState(
-    "Hey there! I'm so happy you're here, thanks so much for your interest 😊"
-  );
-  const [editableMessage2, setEditableMessage2] = useState(
-    "Click below and I'll send you the link in just a sec 🔗"
-  );
   const [editableMessage3, setEditableMessage3] = useState("Send me the link");
   const [isEditingMessages, setIsEditingMessages] = useState(false);
 
@@ -58,23 +53,16 @@ const DMView: React.FC<DMViewProps> = ({ triggerWords = [] }) => {
       return [
         {
           id: 1,
-          text: "Hey there! I'm so happy you're here, thanks so much for your interest �",
+          text: dmMessage,
           sender: "botspacehq",
           time: "2:45 PM",
           isOwn: true,
         },
         {
           id: 2,
-          text: editableMessage2,
-          sender: "botspacehq",
-          time: "2:46 PM",
-          isOwn: true,
-        },
-        {
-          id: 3,
           text: editableMessage3,
           sender: "botspacehq",
-          time: "2:47 PM",
+          time: "2:46 PM",
           isOwn: true,
           isButton: true,
         },
@@ -84,23 +72,16 @@ const DMView: React.FC<DMViewProps> = ({ triggerWords = [] }) => {
     const baseMessages = [
       {
         id: 1,
-        text: editableMessage1,
+        text: dmMessage,
         sender: "botspacehq",
         time: "2:45 PM",
         isOwn: true,
       },
       {
         id: 2,
-        text: editableMessage2,
-        sender: "botspacehq",
-        time: "2:46 PM",
-        isOwn: true,
-      },
-      {
-        id: 3,
         text: editableMessage3,
         sender: "botspacehq",
-        time: "2:47 PM",
+        time: "2:46 PM",
         isOwn: true,
         isButton: true,
       },
@@ -212,20 +193,14 @@ const DMView: React.FC<DMViewProps> = ({ triggerWords = [] }) => {
           {isEditingMessages && (
             <div className="edit-messages-panel">
               <div className="edit-field">
-                <label>Message 1:</label>
+                <label>Main Message:</label>
                 <textarea
-                  value={editableMessage1}
-                  onChange={(e) => setEditableMessage1(e.target.value)}
-                  rows={2}
+                  value={dmMessage}
+                  readOnly
+                  placeholder="Edit this message from the sidebar"
+                  rows={4}
                 />
-              </div>
-              <div className="edit-field">
-                <label>Message 2:</label>
-                <textarea
-                  value={editableMessage2}
-                  onChange={(e) => setEditableMessage2(e.target.value)}
-                  rows={2}
-                />
+                <small>This message is controlled from the sidebar</small>
               </div>
               <div className="edit-field">
                 <label>Button Text:</label>

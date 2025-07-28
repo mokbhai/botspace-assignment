@@ -8,6 +8,7 @@ interface SidebarProps {
   onCommentsVisibilityChange: (visible: boolean) => void;
   onDMVisibilityChange: (visible: boolean) => void;
   onTriggerWordsChange: (words: string[]) => void;
+  onDMMessageChange: (message: string) => void;
 }
 
 const Sidebar: React.FC<SidebarProps> = ({
@@ -16,6 +17,7 @@ const Sidebar: React.FC<SidebarProps> = ({
   onCommentsVisibilityChange,
   onDMVisibilityChange,
   onTriggerWordsChange,
+  onDMMessageChange,
 }) => {
   const [selectedOption, setSelectedOption] = useState("specific");
   const [showSecondSection, setShowSecondSection] = useState(false);
@@ -23,11 +25,8 @@ const Sidebar: React.FC<SidebarProps> = ({
   const [commentTrigger, setCommentTrigger] = useState("specific");
   const [triggerWords, setTriggerWords] = useState("Price, Link, Shop");
   const [tags, setTags] = useState(["Price", "Link", "Shop"]);
-  const [dmMessage1, setDmMessage1] = useState(
-    "Hey there! I'm so happy you're here, thanks so much for your interest 😊"
-  );
-  const [dmMessage2, setDmMessage2] = useState(
-    "Click below and I'll send you the link in just a sec 🔗"
+  const [dmMessage, setDmMessage] = useState(
+    "Hey there! I'm so happy you're here, thanks so much for your interest 😊\n\nClick below and I'll send you the link in just a sec 🔗"
   );
   const [dmLinkText, setDmLinkText] = useState("Hey");
 
@@ -291,16 +290,13 @@ const Sidebar: React.FC<SidebarProps> = ({
 
             <div className="dm-preview">
               <textarea
-                value={dmMessage1}
-                onChange={(e) => setDmMessage1(e.target.value)}
+                value={dmMessage}
+                onChange={(e) => {
+                  setDmMessage(e.target.value);
+                  onDMMessageChange(e.target.value);
+                }}
                 className="dm-textarea"
-                rows={2}
-              />
-              <textarea
-                value={dmMessage2}
-                onChange={(e) => setDmMessage2(e.target.value)}
-                className="dm-textarea"
-                rows={1}
+                rows={4}
               />
               <button className="dm-link-btn">Send me the link</button>
             </div>
