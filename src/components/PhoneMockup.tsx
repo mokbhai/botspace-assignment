@@ -22,6 +22,7 @@ interface PhoneMockupProps {
   showDMSection: boolean;
   triggerWords: string[];
   dmMessage: string;
+  dmButtonText: string;
 }
 
 const PhoneMockup: React.FC<PhoneMockupProps> = ({
@@ -30,6 +31,7 @@ const PhoneMockup: React.FC<PhoneMockupProps> = ({
   showDMSection,
   triggerWords,
   dmMessage,
+  dmButtonText,
 }) => {
   const [activeTab, setActiveTab] = useState("Post");
   const [showComments, setShowComments] = useState(false);
@@ -166,7 +168,11 @@ const PhoneMockup: React.FC<PhoneMockupProps> = ({
           )}
 
           {activeTab === "DM" && (
-            <DMView triggerWords={triggerWords} dmMessage={dmMessage} />
+            <DMView
+              triggerWords={triggerWords}
+              dmMessage={dmMessage}
+              dmButtonText={dmButtonText}
+            />
           )}
         </div>
 

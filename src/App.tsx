@@ -16,6 +16,7 @@ function App() {
   const [dmMessage, setDmMessage] = useState(
     "Hey there! I'm so happy you're here, thanks so much for your interest 😊\n\nClick below and I'll send you the link in just a sec 🔗"
   );
+  const [dmButtonText, setDmButtonText] = useState("Send me the link");
 
   const handlePostSelect = (post: Post) => {
     setSelectedPost(post);
@@ -37,6 +38,10 @@ function App() {
     setDmMessage(message);
   };
 
+  const handleDMButtonTextChange = (buttonText: string) => {
+    setDmButtonText(buttonText);
+  };
+
   return (
     <div className="app">
       <div className="container">
@@ -47,6 +52,7 @@ function App() {
           onDMVisibilityChange={handleDMVisibility}
           onTriggerWordsChange={handleTriggerWordsChange}
           onDMMessageChange={handleDMMessageChange}
+          onDMButtonTextChange={handleDMButtonTextChange}
         />
         <div className="preview-section">
           <div className="preview-header">
@@ -59,6 +65,7 @@ function App() {
             showDMSection={showDMSection}
             triggerWords={triggerWords}
             dmMessage={dmMessage}
+            dmButtonText={dmButtonText}
           />
         </div>
       </div>

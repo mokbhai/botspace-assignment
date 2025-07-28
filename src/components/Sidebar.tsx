@@ -9,6 +9,7 @@ interface SidebarProps {
   onDMVisibilityChange: (visible: boolean) => void;
   onTriggerWordsChange: (words: string[]) => void;
   onDMMessageChange: (message: string) => void;
+  onDMButtonTextChange: (buttonText: string) => void;
 }
 
 const Sidebar: React.FC<SidebarProps> = ({
@@ -18,6 +19,7 @@ const Sidebar: React.FC<SidebarProps> = ({
   onDMVisibilityChange,
   onTriggerWordsChange,
   onDMMessageChange,
+  onDMButtonTextChange,
 }) => {
   const [selectedOption, setSelectedOption] = useState("specific");
   const [showSecondSection, setShowSecondSection] = useState(false);
@@ -28,7 +30,7 @@ const Sidebar: React.FC<SidebarProps> = ({
   const [dmMessage, setDmMessage] = useState(
     "Hey there! I'm so happy you're here, thanks so much for your interest 😊\n\nClick below and I'll send you the link in just a sec 🔗"
   );
-  const [dmLinkText, setDmLinkText] = useState("Hey");
+  const [dmLinkText, setDmLinkText] = useState("Send me the link");
 
   const posts: Post[] = [
     {
@@ -298,7 +300,16 @@ const Sidebar: React.FC<SidebarProps> = ({
                 className="dm-textarea"
                 rows={4}
               />
-              <button className="dm-link-btn">Send me the link</button>
+              <input
+                type="text"
+                value={dmLinkText}
+                onChange={(e) => {
+                  setDmLinkText(e.target.value);
+                  onDMButtonTextChange(e.target.value);
+                }}
+                className="dm-link-btn-editable"
+                placeholder="Button text..."
+              />
             </div>
           </div>
 

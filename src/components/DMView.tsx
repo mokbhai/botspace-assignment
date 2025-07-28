@@ -10,11 +10,15 @@ import {
 interface DMViewProps {
   triggerWords?: string[];
   dmMessage: string;
+  dmButtonText: string;
 }
 
-const DMView: React.FC<DMViewProps> = ({ triggerWords = [], dmMessage }) => {
+const DMView: React.FC<DMViewProps> = ({
+  triggerWords = [],
+  dmMessage,
+  dmButtonText,
+}) => {
   const [messageText, setMessageText] = useState("");
-  const [editableMessage3, setEditableMessage3] = useState("Send me the link");
   const [isEditingMessages, setIsEditingMessages] = useState(false);
 
   const conversations = [
@@ -60,7 +64,7 @@ const DMView: React.FC<DMViewProps> = ({ triggerWords = [], dmMessage }) => {
         },
         {
           id: 2,
-          text: editableMessage3,
+          text: dmButtonText,
           sender: "botspacehq",
           time: "2:46 PM",
           isOwn: true,
@@ -79,7 +83,7 @@ const DMView: React.FC<DMViewProps> = ({ triggerWords = [], dmMessage }) => {
       },
       {
         id: 2,
-        text: editableMessage3,
+        text: dmButtonText,
         sender: "botspacehq",
         time: "2:46 PM",
         isOwn: true,
@@ -206,9 +210,11 @@ const DMView: React.FC<DMViewProps> = ({ triggerWords = [], dmMessage }) => {
                 <label>Button Text:</label>
                 <input
                   type="text"
-                  value={editableMessage3}
-                  onChange={(e) => setEditableMessage3(e.target.value)}
+                  value={dmButtonText}
+                  readOnly
+                  placeholder="Edit this from the sidebar"
                 />
+                <small>This button text is controlled from the sidebar</small>
               </div>
             </div>
           )}
